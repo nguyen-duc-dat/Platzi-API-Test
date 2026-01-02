@@ -109,6 +109,7 @@ Platzi_Ecommerce_Automation/
     └── 📂 Delete_Category
         ├── DEL Delete Category (Customer) 🔒
         └── GET Delete Category (Admin)
+```
 
 ## 8. Hướng dẫn cài đặt & Chạy (How to run)
 Để chạy thử dự án này trên máy của bạn:
