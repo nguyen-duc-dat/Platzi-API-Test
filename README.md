@@ -58,7 +58,59 @@ Phân tích và log chi tiết các lỗi bảo mật nghiêm trọng (Critical/
 - **`Platz_Collection.json`**: Source Code (Collection) chứa toàn bộ kịch bản test.
 - **`Platzi_env.json`**: File cấu hình biến môi trường (Base URL, Tokens...).
 
-## 7. Hướng dẫn cài đặt & Chạy (How to run)
+##  7. Cấu trúc Kịch bản Kiểm thử (Test Collection Structure)
+Dưới đây là sơ đồ tổ chức các Test Cases trong Postman Collection, được chia theo từng Module và phân loại Happy Path / Negative Cases:
+
+```text
+Platzi_Ecommerce_Automation/
+├── 📁 00_Pre (Setup Data)
+│   ├── POST Create User
+│   ├── POST Get Access Token (Admin)
+│   └── POST Get Access Token (Customer)
+│
+├── 📁 01_Auth (Authentication)
+│   ├── 📂 Login_Scenarios
+│   │   ├── POST Login Success (Admin)
+│   │   ├── POST Login Success (Customer)
+│   │   ├── POST Login Fail - Wrong Password
+│   │   └── POST Login Fail - Invalid Email Format
+│   ├── 📂 UserProfile
+│   │   └── GET Get My Profile (Valid Token)
+│   └── 📂 RefreshToken
+│       ├── POST Refresh Access Token (Admin)
+│       └── POST Refresh Access Token (Customer)
+│
+├── 📁 02_Products (Product Management)
+│   ├── 📂 Create_Product
+│   │   ├── POST Create Product Success (Admin)
+│   │   ├── POST Create Product Fail (Price is negative)
+│   │   ├── POST Create Product Fail (Missing Title)
+│   │   └── POST Create Product Fail (Customer Role - Forbidden) 🔒
+│   ├── 📂 Read_Product
+│   │   ├── GET Get All Products
+│   │   ├── GET Get Single Product (Valid ID)
+│   │   └── GET Get Single Product (Invalid ID - 404)
+│   ├── 📂 Update_Product
+│   │   ├── PUT Update Product Success (Admin)
+│   │   ├── PUT Update Product (Invalid Data)
+│   │   └── PUT Update Product Fail (Customer Role - Forbidden) 🔒
+│   └── 📂 Delete_Product
+│       ├── DEL Delete Product Success (Admin)
+│       ├── GET Verify Delete (Get Product)
+│       └── DEL Delete Product Fail (Customer Role - Forbidden) 🔒
+│
+└── 📁 03_Categories (Category Management)
+    ├── 📂 Create_Category
+    │   ├── POST Create Category (Admin)
+    │   └── POST Create Category (Customer - Forbidden) 🔒
+    ├── 📂 Update_Category
+    │   ├── PUT Update Category (Admin)
+    │   └── PUT Update Category (Customer)
+    └── 📂 Delete_Category
+        ├── DEL Delete Category (Customer) 🔒
+        └── GET Delete Category (Admin)
+
+## 8. Hướng dẫn cài đặt & Chạy (How to run)
 Để chạy thử dự án này trên máy của bạn:
 
 1. **Cài đặt:** Tải và cài đặt [Postman](https://www.postman.com/downloads/).
